@@ -15,7 +15,7 @@
   [scale instrument]
   (let [time (ovl/now)]
     (ovl/at time (instrument (first scale)))
-    (ovl/apply-at (+ 1000 time) play-scale (rest scale) instrument [])))
+    (ovl/apply-at (+ 500 time) play-scale (rest scale) instrument [])))
 
 (defn play-chord
   "Plays a chord"
