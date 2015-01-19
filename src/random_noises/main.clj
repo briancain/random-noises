@@ -6,7 +6,7 @@
 (defn chord-beat
   []
   (pattern/looper (ovl/metronome 120) inst/adv-kick)
-  (pattern/minor-progression inst/sawh))
+  (pattern/minor-progression inst/squarew))
 
 (defn start-the-music
   "Start it"

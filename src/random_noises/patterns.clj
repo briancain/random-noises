@@ -3,12 +3,19 @@
             [random-noises.instruments :as inst]))
 
 (defn play-arpeggio
-  "doc-string"
+  "Plays an arpeggio from a chord"
   [chrd instrument]
   (let [time (ovl/now)]
     (ovl/at time (instrument (first chrd)))
-    (ovl/at (+ 1000 time) (instrument (last chrd)))
-    (ovl/at (+ 2000 time) (instrument (second chrd)))))
+    (ovl/at (+ 500 time) (instrument (last chrd)))
+    (ovl/at (+ 1000 time) (instrument (second chrd)))))
+
+(defn play-scale
+  "Takes a scale and instrument and plays a scale"
+  [scale instrument]
+  (let [time (ovl/now)]
+    (ovl/at time (instrument (first scale)))
+    (ovl/apply-at (+ 1000 time) play-scale (rest scale) instrument [])))
 
 (defn play-chord
   "Plays a chord"
@@ -23,6 +30,12 @@
     (ovl/at (nome beat) (sound))
     (ovl/at (+ 2 beat) (inst/c-hat))
     (ovl/apply-by (nome (inc beat)) looper nome sound [])))
+
+(defn advanced-minor-progression
+  [instrument]
+  (let [time (ovl/now)]
+    (ovl/at time (play-arpeggio (ovl/chord :D3 :minor) instrument))
+    (ovl/apply-at (+ 7990 time) advanced-minor-progression instrument [])))
 
 (defn minor-progression
   [instrument]
