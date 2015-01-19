@@ -4,7 +4,8 @@
 
 (defn chord-beat
   []
-  (inst/minor-progression (inst/looper (ovl/metronome 120) inst/kick)))
+  (inst/looper (ovl/metronome 120) inst/adv-kick)
+  (inst/minor-progression))
 
 (defn start-the-music
   "Start it"
