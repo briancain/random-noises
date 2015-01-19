@@ -7,8 +7,7 @@
   [chrd instrument]
   (let [time (ovl/now)]
     (ovl/at time (instrument (first chrd)))
-    (ovl/at (+ 500 time) (instrument (last chrd)))
-    (ovl/at (+ 1000 time) (instrument (second chrd)))))
+    (ovl/apply-at (+ 500 time) play-arpeggio (rest chrd) instrument [])))
 
 (defn play-scale
   "Takes a scale and instrument and plays a scale"
