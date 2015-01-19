@@ -27,26 +27,3 @@
   "Takes a music note...like :C4"
   [music-note]
   (saw-wave (ovl/midi->hz (ovl/note music-note))))
-
-(defn play-chord
-  "Plays a chord"
-  [chrd]
-  (doseq [note chrd]
-    (sawh note)))
-
-(defn looper
-  "Drum beat that takes a metronome and a sound"
-  [nome sound]
-  (let [beat (nome)]
-    (ovl/at (nome beat) (sound))
-    (ovl/at (+ 2 beat) (c-hat))
-    (ovl/apply-by (nome (inc beat)) looper nome sound [])))
-
-(defn minor-progression
-  []
-  (let [time (ovl/now)]
-    (ovl/at time (play-chord (ovl/chord :D3 :minor)))
-    (ovl/at (+ 2000 time) (play-chord (ovl/chord :F3 :minor)))
-    (ovl/at (+ 4000 time) (play-chord (ovl/chord :D3 :minor)))
-    (ovl/at (+ 6000 time) (play-chord (ovl/chord :Eb3 :minor)))
-    (ovl/apply-at (+ 7990 time) minor-progression [])))
